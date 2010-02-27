@@ -1,4 +1,4 @@
 .bundle
-*.sqlite3
+*.sqlite
 log/*.log
 tmp/**/*
