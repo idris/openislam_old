@@ -21,14 +21,16 @@ def load_suras
   data = XmlSimple.xml_in('db/data/tanzil/quran-data.xml')
   data['suras'][0]['sura'].each do |s|
     sura = Sura.new
-    sura.number = s['index']
-    sura.name = s['name']
-    sura.tname = s['tname']
-    sura.ename = s['ename']
-    sura.type = s['type']
-    sura.order = s['order']
+    sura.attributes = {
+      :number => s['index'], 
+      :name => s['name'], 
+      :tname => s['tname'], 
+      :ename => s['ename'], 
+      :type => s['type'], 
+      :order => s['order']
+    }
     begin
-      sura.save
+      sura.save!
     rescue DataObjects::IntegrityError
       error "Database is not clean."
       return false
@@ -40,19 +42,21 @@ end
 def load_ayas
   data = XmlSimple.xml_in('db/data/tanzil/quran-uthmani.xml')
   data['sura'].each do |s|
-    sura_number = s['index']
+    sura = Sura.get(s['index'])
     s['aya'].each do |a|
-      aya = Aya.new
-      aya.sura_number = sura_number
-      aya.number = a['index']
-      aya.text = a['text']
-      begin
-        aya.save
-      rescue DataObjects::IntegrityError
-        error "Database is not clean."
-        return false
-      end
-      info "Loaded Aya #{aya.to_s}"
+      aya = sura.ayas.new
+      aya.attributes = {
+        :sura => sura,
+        :number => a['index'],
+        :text => a['text']
+      }
+      info "#{aya.sura_number}:#{aya.number}"
+    end
+    begin
+      sura.save!
+    rescue DataObjects::IntegrityError
+      error "Database is not clean."
+      return false
     end
   end
 end
@@ -65,45 +69,54 @@ def import_translation_text(path, translation)
       line = f.gets
       raise EOFError.new("Translation file [#{path}] ended preemtively on aya #{aya.to_s}") if !line || line.length <= 1
       line = line.strip()
-      t = TranslatedAya.new
-      t.sura_number = aya.sura_number
-      t.aya_number = aya.number
-      t.translation = translation
-      t.text = line
-      begin
-        t.save
-      rescue DataObjects::IntegrityError
-        error "Database is not clean."
-        return false
-      end
+      t = translation.translated_ayas.new
+      t.attributes = {
+        :sura_number => aya.sura_number,
+        :aya_number => aya.number,
+        :translation => translation,
+        :text => line
+      }
       info "[#{translation.name}] #{aya.to_s}"
     end
+  end
+
+  begin
+    translation.save!
+  rescue DataObjects::IntegrityError
+    error "Database is not clean."
+    return false
   end
 end
 
 def load_translations
   translation = QuranTranslation.new
-  translation.name = 'Yusuf Ali'
-  translation.translator = 'Abdullah Yusuf Ali'
-  translation.source_name = 'Zekr.org'
-  translation.source_url = 'http://zekr.org/resources.html'
-  translation.save
+  translation.attributes = {
+    :name => 'Yusuf Ali',
+    :translator => 'Abdullah Yusuf Ali',
+    :source_name => 'Zekr.org',
+    :source_url => 'http://zekr.org/resources.html'
+  }
+  translation.save!
   import_translation_text('db/data/zekr/yusufali.txt', translation)
 
   translation = QuranTranslation.new
-  translation.name = 'Shakir'
-  translation.translator = 'Mohammad Habib Shakir'
-  translation.source_name = 'Zekr.org'
-  translation.source_url = 'http://zekr.org/resources.html'
-  translation.save
+  translation.attributes = {
+    :name => 'Shakir',
+    :translator => 'Mohammad Habib Shakir',
+    :source_name => 'Zekr.org',
+    :source_url => 'http://zekr.org/resources.html'
+  }
+  translation.save!
   import_translation_text('db/data/zekr/shakir.txt', translation)
 
   translation = QuranTranslation.new
-  translation.name = 'Pickthall'
-  translation.translator = 'Mohammed Marmaduke William Pickthall'
-  translation.source_name = 'Zekr.org'
-  translation.source_url = 'http://zekr.org/resources.html'
-  translation.save
+  translation.attributes = {
+    :name => 'Pickthall',
+    :translator => 'Mohammad Marmaduke William Pickthall',
+    :source_name => 'Zekr.org',
+    :source_url => 'http://zekr.org/resources.html'
+  }
+  translation.save!
   import_translation_text('db/data/zekr/pickthall.txt', translation)
 end
 
