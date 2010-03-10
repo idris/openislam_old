@@ -1,6 +1,7 @@
 class TranslatedAya
   include DataMapper::Resource
 
+  property :id, Serial
   property :sura_number, Integer, :key => true
   property :aya_number, Integer, :key => true
   property :translation_id, Integer, :key => true

@@ -13,6 +13,10 @@ class Sura
   has n, :translated_ayas, :child_key => [ :sura_number ]
 
 
+  def translation(tid=1)
+    translated_ayas.all(:translation_id => tid)
+  end
+
   def to_s
     "#{number}. #{ename}"
   end
