@@ -1,4 +1,7 @@
 Openislam::Application.routes.draw do |map|
+  match 'quran' => 'quran#index', :as => :quran
+  match 'quran/:sura_number' => 'quran#sura', :as => :sura
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -48,7 +51,7 @@ Openislam::Application.routes.draw do |map|
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => "welcome#index"
+  root :to => "quran#index"
 
   # See how all your routes lay out with "rake routes"
 

@@ -1,0 +1,117 @@
+@font-face {
+  font-family: "arabeyes_quran";/
+  src: url("/fonts/arabeyes-qr.ttf");
+}
+@font-face {
+  /* Madinah Mushaf */
+  font-family: "me_quran";
+/*  src: url("/fonts/me_quran_volt_newmet.ttf");*/
+  src: url("/fonts/me_quran_volt_mark2.ttf");
+}
+@font-face {
+  font-family: "mry_KacstQurn";
+  src: url("/fonts/mry_KacstQurn.ttf");
+}
+@font-face {
+  font-family: "saleem";
+  src: url("/fonts/PDMS_Saleem_QuranFont-signed.ttf");
+}
+@font-face {
+  font-family: "quran_madina";
+  src: url("/fonts/MADDINA.ttf");
+}
+@font-face {
+  font-family: "quran_standard";
+  src: url("/fonts/QUR_STD.ttf");
+}
+@font-face {
+  font-family: "nazli";
+  src: url("/fonts/nazli.ttf");
+}
+
+
+#logo h1 a {
+  font-family: Garamond, Palatino, 'Times New Roman', serif;
+  font-weight: normal;
+  letter-spacing: 1px;
+}
+
+#content dl.indexed dt {
+  color:#33352C;
+  font-family:Georgia,"Times New Roman",Times,serif;
+  background:#F4F5F3 url(/images/content-sep.jpg) repeat-x 0 0;
+  border-bottom:#E2E4E0 1px solid;
+  clear:both;
+  font-size:1.8em;
+  margin:10px -20px;
+  padding:5px 20px
+}
+
+
+dl.arabic {
+  font-size: 23px;
+}
+
+dt {
+  
+}
+
+dd {
+  margin: 4px 0 20px 0;
+}
+
+.aya img {
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+
+.aya {
+  font-size: 23px;
+  margin-bottom: 0;
+}
+
+.arabic, .arabicText {
+  text-align: right;
+  direction: rtl;
+  font-family: "nazli", Tahoma;
+/*  word-spacing: 5px;*/
+  line-height: 1.8em;
+  font-size: 20px;
+}
+
+h1 .arabic {
+  line-height: 1.1em;
+}
+
+.viewSurah td tr {padding:20px; text-align:center;}
+.aya-number {
+  font-family: 'Times New Roman', serif;
+  color: #ccc !important;
+  display: block;
+  float: right;
+  font-size: 20px;
+  line-height: 35px;
+  text-align: right;
+  width: 55px;
+  padding: 2px 0 0 0;
+}
+.translation {
+  font-family: Palatino, Garamond, 'Times New Roman', serif;
+  font-size:13px;
+  margin-bottom:5px;
+  margin-top: 0;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+.word_list, .ayah_list {
+  margin:0;
+  padding:0;
+  list-style-type:none;
+  text-align: right;
+}
+ul.word_list li, ul.ayah_list li {
+  background: none;
+}

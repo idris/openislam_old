@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+
+<title>iQuran - <%= yield :title %></title>
+
+<%= stylesheet_link_tag "style" %>
+<%= stylesheet_link_tag "openislam" %>
+
+
+<!--[if IE 6]>
+<style type="text/css">
+.comment-form{margin-bottom: -3px}
+</style>
+<![endif]-->
+
+</head>
+<body id="top">
+<div id="container">
+    <div id="wrapper">
+
+        <div id="header">
+            <div id="logo">
+                <!-- Your Logo image - max-width: 200px -->
+                <!-- USAGE:
+                	1-create your own logo and save it as logo.jpg in the folder "images" in your theme folder.
+                	2-uncomment code below:
+                <a class="logo" href="/" title="Back Home"></a>
+                -->
+        	    <h1><a href="/">iQuran</a></h1>
+            </div>
+
+		    <!-- ADMIN NAVIGATION -->
+            <ul id="navAdmin">
+                <% if false and logged_in? %>
+                    <li><a>Signed in as <b> <%= current_user.login %></b></a></li>
+    			    <li><%= link_to "Logout", logout_path %></li>
+			    <% else %>
+    			    <li><%=link_to "Sign In", "" %></li>
+    			    <li><%=link_to "Register", "" %></li>
+    		    <% end %>
+			</ul>
+
+		    <!-- MAIN NAVIGATION -->
+            <ul class="menu">
+    			<li><%= link_to "Home", "/" %></li>
+    			<li><%= link_to "Browse", "/quran" %></li>
+    			<li><a href="/root_words/">Roots</a></li>
+    			<li><%= link_to "Notes", "/notes" %></li>
+    			<li><%= link_to "Labels", "/tags" %></li>
+    			<li><a href="http://iquran.uservoice.com/">Contact</a></li>
+			</ul>
+			<!-- / END MAIN NAVIGATION -->
+            
+
+            <!-- FEED -->
+<!--
+            <a id="rss" href="#" title="Syndicate this site using RSS">SUBSCRIBE TO <b>RSS</b></a>
+-->
+
+        </div>
+
+        <div id="pageWrapper">
+
+
+
+
+
+
+            <div id="content">
+
+<!--
+                <div id="intro">
+                    <p><a href="/"><b>iQuran</b></a>: Online Islamic Research</p>
+                </div>
+-->
+
+
+
+                <!-- added by idris -->
+                <p style="color: green"><%= flash[:notice] %></p>
+
+
+
+
+                    <div class="postWrapper">
+
+                        <!-- META -->
+<!--
+                        <div class="postmetadata">
+                            <p class="meta-date">
+                                <span class="date-day">11</span>
+                                <span class="date-month">Nov</span>
+                                <span class="date-year">2009</span>
+                            </p>
+                            <p class="meta-author">by Byline</p>
+                            <p class="meta-edit">Edit</p>
+                            <p class="meta-comments"><a href="#comments">1 Comment &#187;</a></p>
+                        </div>
+-->
+
+            			<div class="post">
+            				<h1><%= yield :title %></h1>
+
+            				<div class="entry">
+            				    <%= yield %>
+<!--
+                                <?php wp_link_pages(array('before' => '<p><strong>Pages:</strong> ', 'after' => '</p>', 'next_or_number' => 'number')); ?>
+-->
+            				</div>
+                        </div>
+                    </div>
+
+
+
+
+
+<!--
+                    <p class="nocomments">This post is password protected. Enter the password to view comments.</p>
+-->
+<!--
+                    <?php comments_template('', true); ?>
+-->
+
+
+            </div> <!-- / content -->
+
+
+
+
+
+
+
+
+
+        	<div id="sidebar">
+        		<ul>
+        			<li class="nobackground">
+        					<form method="get" id="searchform" action="#">
+
+                        	<div>
+                        	<input class="search-field" type="text" onfocus="this.value=''" onblur="this.value='Search coming soon...'" value="Search coming soon..." name="s" id="s" />
+                        	<input class="search-submit" type="submit" value="" />
+                        	</div>
+                        </form>
+        			</li>
+
+<!--
+                    <li><h2>Author</h2>
+                    <p>This is an example of a WordPress page, you could edit this to put information about yourself or your site so readers know where you are coming from.</p>
+                    </li>
+-->
+
+        			<!-- Banners  / OPTIONAL  -->
+        			<!-- Banners' size must be 125x125 -->
+<!--
+                    <li class="ads clearfix"><h2>Our Sponsors</h2>
+                        <a class="ad-left" href="#"><img src="<?php bloginfo('template_url'); ?>/images/ad.jpg" alt="" /></a>
+                        <a class="ad-right" href="#"><img src="<?php bloginfo('template_url'); ?>/images/ad.jpg" alt="" /></a>
+                    </li>
+-->
+
+
+<% if false and logged_in? %>
+<li id="my_labels">
+	<h2>My Labels</h2>
+	<ul>
+		<% current_user.owned_tags.uniq.reverse.each do |t| %>
+			<li><%= link_to t.name, "/tags/#{t.name}" %></li>
+		<% end %>
+	</ul>
+</li>
+<% end %>
+
+                    <!-- Optional - Latest Posts
+                    <li><h2>Latest Posts</h2>
+                        <ul>
+                            <?php get_archives('postbypost', 10); ?>
+                        </ul>
+                    </li>-->
+
+<!--
+                    <li><h2>Archives</h2>
+                        <ul>
+                            <?php wp_get_archives('type=monthly'); ?>
+                        </ul>
+                    </li>
+-->
+
+
+<!--
+                        <li><h2>Meta</h2>
+                        <ul>
+                            <?php wp_register(); ?>
+                            <li><?php wp_loginout(); ?></li>
+                            <li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>
+                            <li><a href="http://gmpg.org/xfn/"><abbr title="XHTML Friends Network">XFN</abbr></a></li>
+                            <li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress</a></li>
+                            <?php wp_meta(); ?>
+                        </ul>
+                        </li>
+-->
+        		</ul>
+        	</div> <!-- / sidebar -->
+
+
+
+
+
+
+
+
+
+
+                        <div class="clear"></div>
+                    </div><!-- / pageWrapper -->
+
+                    <div id="footer">
+            		    <div class="foot_l">&nbsp;</div>
+                        <div class="foot_content">
+                            <div>
+                                stuff
+                            </div>
+                            <?php wp_page_menu('show_home=1&sort_column=menu_order&menu_class=&link_before= - '); ?>
+
+            				<p>
+                            Nothing here is copyright. No rights reserved.
+
+                            <!-- PLEASE DO NOT EDIT OR DELETE THE CODE BELOW THIS LINE -->
+                            <!-- License: http://web-kreation.com/demos/oneroom/index.php/license/ -->
+                            <!-- If you want to remove this copyright notice, please contact me at info {at} web-kreation {dot} com -->
+                            Theme design by <a href="http://web-kreation.com">Web-Kreation</a>.
+                            <!-- / END -->
+
+                            </p>
+            			</div>
+            			<div class="foot_r">&nbsp;</div>
+                        <a href="#top" id="toTop">&nbsp;</a>
+                    </div><!-- / footer -->
+
+                </div><!-- / Wrapper -->
+
+                <!-- Stunning design by Jeeremie - http://web-kreation.com -->
+
+
+            </div><!-- / container -->
+
+
+
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+            </script>
+            <script type="text/javascript">
+            try {
+            var pageTracker = _gat._getTracker("UA-6808422-1");
+            pageTracker._trackPageview();
+            } catch(err) {}</script>
+
+
+            <script type="text/javascript">
+              var uservoiceJsHost = ("https:" == document.location.protocol) ? "https://uservoice.com" : "http://cdn.uservoice.com";
+              document.write(unescape("%3Cscript src='" + uservoiceJsHost + "/javascripts/widgets/tab.js' type='text/javascript'%3E%3C/script%3E"))
+            </script>
+            <script type="text/javascript">
+            UserVoice.Tab.show({ 
+              /* required */
+              key: 'iquran',
+              host: 'iquran.uservoice.com', 
+              forum: 'general', 
+              /* optional */
+              no_dialog: true,
+              alignment: 'left',
+              background_color: '#21221C',//'#DEE1D8',
+              text_color: 'white',
+              hover_color: '#2B2C24',//'#F4F5F3',
+              lang: 'en'
+            })
+            </script>
+
+</body>
+</html>

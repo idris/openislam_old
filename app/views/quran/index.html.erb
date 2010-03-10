@@ -1,0 +1,10 @@
+<ol>
+<% @suras.each do |sura| %>
+<li>
+    <a href="/quran/<%= sura.number %>">
+    <%= sura.tname %> &middot;
+    <%= sura.name %>
+    </a>
+</li>
+<% end %>
+</ol>
