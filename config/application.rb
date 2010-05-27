@@ -2,10 +2,10 @@ require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
 require 'action_controller/railtie'
-require 'dm-rails/railtie'
 require 'action_mailer/railtie'
-# require 'active_resource/railtie'
-# require 'rails/test_unit/railtie'
+require 'active_resource/railtie'
+require 'rails/test_unit/railtie'
+require 'mongoid/railtie'
 
 # Auto-require default libraries and those for the current Rails environment.
 Bundler.require :default, Rails.env
@@ -40,6 +40,11 @@ module Openislam
     #   g.template_engine :erb
     #   g.test_framework  :test_unit, :fixture => true
     # end
+
+    config.secret_token = "fjiojg90egj4gj34t504990gejg4309g4tg35253"
+
+    # Configure the default encoding used in templates for Ruby 1.9.
+    config.encoding = "utf-8"
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters << :password

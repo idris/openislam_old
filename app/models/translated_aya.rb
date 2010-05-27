@@ -1,15 +1,13 @@
 class TranslatedAya
-  include DataMapper::Resource
+  include Mongoid::Document
 
-  property :id, Serial
-  property :sura_number, Integer, :key => true
-  property :aya_number, Integer, :key => true
-  property :translation_id, Integer, :key => true
-  property :text, Text, :lazy => false, :required => true
+  field :text
 
-  belongs_to :sura, :child_key => [ :sura_number ]
-  belongs_to :aya, :child_key => [ :sura_number, :aya_number ]
-  belongs_to :translation, :model => QuranTranslation, :child_key => [ :translation_id ]
+  embedded_in :aya, :inverse_of => :translations
+  belongs_to_related :quran_translation
 
 
+  def to_s
+    text
+  end
 end

@@ -1,15 +1,11 @@
 class QuranTranslation
-  include DataMapper::Resource
+  include Mongoid::Document
 
-  property :id, Serial
-  property :name, String, :unique => true
-  property :translator, String
-  property :source_name, String
-  property :source_url, URI
-
-  has n, :translated_ayas, :child_key => [ :translation_id ]
-
-  validates_is_unique :name
+  field :name
+  field :translator
+  field :source_name
+  field :source_url
+  field :file_path
 
 
 end
